@@ -17,6 +17,7 @@ import java.util.Scanner;
 public class UnoOnline 
 {
     private User users[] = new User[100];//room for 100 online players!
+    private passwordvalidator PasswordValidator;
      
     /**
      * Main method with call to private run method, to encapsulate our
@@ -42,6 +43,9 @@ public class UnoOnline
         Scanner sc = new Scanner(System.in);
         System.out.println("please enter your desired user name:");
         String userName = sc.nextLine();
+        
+        PasswordValidator = new passwordvalidator();
+        
         boolean validPassword=false;
         String password="";
         while(!validPassword)
@@ -51,7 +55,12 @@ public class UnoOnline
             System.out.println("Please enter your desired password:"); 
             
             password = sc.nextLine();
-            int specialCharCount=0;
+            if (PasswordValidator.validatePassword(password)){
+                validPassword = true;
+            }
+            
+        }
+            /*int specialCharCount=0;
             //iterate over each character to see if it is a special character
             for(int i=0;i<password.length(); i++)
             {
@@ -65,7 +74,7 @@ public class UnoOnline
             {
                 validPassword=true;
             }
-        }//loop only ends when password is valid so now we create the User
+        }//loop only ends when password is valid so now we create the User*/
         
         User newUser = new User(userName, password);
         users[userCount] = newUser;//add the new user to the user list
